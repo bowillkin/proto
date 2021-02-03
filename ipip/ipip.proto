@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package com.hubpd.ipip;
+
+option go_package = "./ipip";
+
+
+service Ipip {
+  rpc GetAreaDataByIp(GetAreaDataByIpReq) returns (GetAreaDataByIpResp);   // 初始化平台融合号 和 领域
+}
+
+message GetAreaDataByIpReq{
+  string remoteIp = 1; // ip地址
+}
+
+message GetAreaDataByIpResp{
+  // pos。 返回的所有数据都是zh-CN, 中文。
+  string Country = 1; // 国家
+  string Province = 2; // 省份
+  string City = 3; // 县市
+  enum ErrCode {
+    NONE = 0; // 成功
+  }
+  ErrCode errCode = 4;
+  string errMsg = 5;
+}
