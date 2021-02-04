@@ -2,6 +2,8 @@ package proto
 
 import (
 	"fmt"
+	_ "go.uber.org/automaxprocs"
+
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_opentracing "github.com/grpc-ecosystem/go-grpc-middleware/tracing/opentracing"
 	gh "google.golang.org/grpc/health/grpc_health_v1"
