@@ -3,8 +3,10 @@ package proto
 import (
 	"fmt"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
-	"github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	grpc_opentracing "github.com/grpc-ecosystem/go-grpc-middleware/tracing/opentracing"
+	gh "google.golang.org/grpc/health/grpc_health_v1"
+
+	"github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	"github.com/sercand/kuberesolver/v3"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
@@ -39,6 +41,7 @@ func Run(s *grpc.Server, serverAddress string) error {
 	if err != nil {
 		return fmt.Errorf("failed to listen %w", err)
 	}
+	gh.RegisterHealthServer(s, new(HealthServer))
 	return s.Serve(lis)
 }
 
